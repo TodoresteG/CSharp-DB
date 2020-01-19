@@ -1,0 +1,52 @@
+CREATE TABLE Students (
+	Id INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(30) NOT NULL,
+	MiddleName NVARCHAR(25),
+	LastName NVARCHAR(30) NOT NULL,
+	Age INT CHECK(Age >= 5 AND Age <= 100),
+	[Address] NVARCHAR(50),
+	Phone NVARCHAR(10)
+)
+
+CREATE TABLE Subjects (
+	Id INT PRIMARY KEY IDENTITY,
+	[Name] NVARCHAR(20) NOT NULL,
+	Lessons INT CHECK(Lessons > 0) NOT NULL
+)
+
+CREATE TABLE StudentsSubjects (
+	Id INT PRIMARY KEY IDENTITY,
+	StudentId INT FOREIGN KEY REFERENCES Students(Id),
+	SubjectId INT FOREIGN KEY REFERENCES Subjects(Id),
+	Grade DECIMAL(18, 2) CHECK(Grade >= 2.00 AND Grade <= 6.00) NOT NULL
+)
+
+CREATE TABLE Exams (
+	Id INT PRIMARY KEY IDENTITY,
+	[Date] DATETIME,
+	SubjectId INT FOREIGN KEY REFERENCES Subjects(Id)
+)
+
+CREATE TABLE StudentsExams (
+	StudentId INT FOREIGN KEY REFERENCES Students(Id),
+	ExamId INT FOREIGN KEY REFERENCES Exams(Id),
+	Grade DECIMAL(18, 2) CHECK(Grade >= 2.00 AND Grade <= 6.00) NOT NULL,
+
+	CONSTRAINT PK_StudentsExams PRIMARY KEY(StudentId, ExamId)
+)
+
+CREATE TABLE Teachers (
+	Id INT PRIMARY KEY IDENTITY,
+	FirstName NVARCHAR(20) NOT NULL,
+	LastName NVARCHAR(20) NOT NULL,
+	[Address] NVARCHAR(20) NOT NULL,
+	Phone CHAR(10),
+	SubjectId INT FOREIGN KEY REFERENCES Subjects(Id)
+)
+
+CREATE TABLE StudentsTeachers (
+	StudentId INT FOREIGN KEY REFERENCES Students(Id),
+	TeacherId INT FOREIGN KEY REFERENCES Teachers(Id),
+
+	CONSTRAINT PK_StudentsTeachers PRIMARY KEY (StudentId, TeacherId)
+)
