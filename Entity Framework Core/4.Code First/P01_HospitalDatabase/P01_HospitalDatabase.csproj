@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20191101124934_InitialMigration.cs" />
+    <Compile Remove="Migrations\20191101124934_InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191101130128_add-migraion InitialMigration.cs" />
+    <Compile Remove="Migrations\20191101130128_add-migraion InitialMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191101132003_DoctorAdded.cs" />
+    <Compile Remove="Migrations\20191101132003_DoctorAdded.Designer.cs" />
+    <Compile Remove="Migrations\20191101140819_DoctorAdded.cs" />
+    <Compile Remove="Migrations\20191101140819_DoctorAdded.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.0" />
+  </ItemGroup>
+
+</Project>
